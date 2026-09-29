@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shirttrd - Toko Pakaian Modern</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Google Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ==============================================
+       HALAMAN 1: KELOMPOK 8 & FOTO ANGGOTA
+  =============================================== -->
+  <section id="page-landing" class="page active">
+    <div class="landing-container">
+      <div class="header-badge">Proyek Web</div>
+      <h1 class="main-title">Kelompok 8</h1>
+      <p class="subtitle">Anggota Tim Pengembang Website shirttrd</p>
+
+      <!-- Kotak Foto Ukuran Bebas -->
+      <div class="photo-grid">
+        <div class="photo-card">
+          <div class="photo-wrapper">
+            <img src="steven.jpeg" alt="Steven" />
+          </div>
+          <span class="member-tag">Steven</span>
+        </div>
+        <div class="photo-card">
+          <div class="photo-wrapper">
+            <img src="destran.jpeg" alt="Destran" />
+          </div>
+          <span class="member-tag">Destran</span>
+        </div>
+        <div class="photo-card">
+          <div class="photo-wrapper">
+            <img src="zidan.jpeg" alt="Zidan" />
+          </div>
+          <span class="member-tag">Zidan</span>
+        </div>
+      </div>
+
+      <!-- Tombol Mulai -->
+      <button id="btn-start" class="btn btn-primary btn-large">
+        Mulai Jelajahi
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       HALAMAN 2: LOGIN & SIGN UP (shirttrd)
+  =============================================== -->
+  <section id="page-auth" class="page">
+    <div class="auth-card">
+      <div class="brand-header">
+        <span class="brand-logo">shirttrd</span>
+        <p class="brand-desc">Tempat jual beli baju & streetwear terbaik</p>
+      </div>
+
+      <!-- Tab Toggle -->
+      <div class="tab-switch">
+        <button id="tab-login-btn" class="tab-btn active">Masuk</button>
+        <button id="tab-signup-btn" class="tab-btn">Daftar Akun</button>
+      </div>
+
+      <!-- Form Login -->
+      <form id="form-login" class="auth-form active">
+        <div class="form-group">
+          <label>Email atau Username</label>
+          <input type="text" id="login-identifier" placeholder="nama@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Masuk ke shirttrd</button>
+      </form>
+
+      <!-- Form Sign Up -->
+      <form id="form-signup" class="auth-form">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="reg-name" placeholder="Nama Lengkap" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="reg-email" placeholder="nama@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi Baru</label>
+          <input type="password" id="reg-password" placeholder="Minimal 6 karakter" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Buat Akun</button>
+      </form>
+
+      <div class="auth-footer">
+        <button id="btn-back-landing" class="btn-text">← Kembali ke Halaman Utama</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       HALAMAN 3: DASHBOARD LIST BAJU
+  =============================================== -->
+  <section id="page-dashboard" class="page">
+    <header class="navbar">
+      <div class="nav-left">
+        <!-- Tulisan/Tombol Jual Baju di Pojok Kiri Atas -->
+        <button id="btn-to-sell" class="btn btn-sell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Jual Baju
+        </button>
+        <span class="nav-brand">shirttrd</span>
+      </div>
+      <div class="nav-right">
+        <span class="user-greeting" id="user-display">Halo, Pengguna!</span>
+        <button id="btn-logout" class="btn btn-outline btn-sm">Keluar</button>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <div class="banner">
+        <div>
+          <h2>Koleksi Pakaian Pilihan</h2>
+          <p>Temukan outfit favorit dari brand ternama dan penjual terverifikasi.</p>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h3>Produk Tersedia</h3>
+        <span class="item-count" id="product-count">0 Produk</span>
+      </div>
+
+      <!-- List Produk Baju -->
+      <div class="product-grid" id="product-list">
+        <!-- Diisi dinamis oleh JavaScript -->
+      </div>
+    </main>
+  </section>
+
+  <!-- ==============================================
+       HALAMAN 4: FORM JUAL BAJU
+  =============================================== -->
+  <section id="page-sell" class="page">
+    <header class="navbar">
+      <div class="nav-left">
+        <button id="btn-back-dashboard" class="btn btn-outline btn-sm">
+          ← Kembali ke Dashboard
+        </button>
+        <span class="nav-brand">shirttrd</span>
+      </div>
+    </header>
+
+    <main class="sell-container">
+      <div class="sell-card">
+        <h2>Pasang Iklan Jual Baju</h2>
+        <p class="sell-subtitle">Lengkapi formulir di bawah ini agar bajumu cepat laku.</p>
+
+        <form id="form-sell">
+          <div class="form-group">
+            <label>Foto Baju</label>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" id="sell-image" accept="image/*" required />
+              <div id="upload-placeholder">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <p>Klik atau seret foto baju ke sini</p>
+                <span>Format JPG, PNG (Maksimal 5MB)</span>
+              </div>
+              <img id="image-preview" class="image-preview" alt="Preview Baju" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sell-brand">Nama Merk / Brand Baju</label>
+            <input type="text" id="sell-brand" placeholder="Contoh: Uniqlo, Erigo, Stussy" required />
+          </div>
+
+          <div class="form-group">
+            <label for="sell-title">Nama Model / Seri Baju</label>
+            <input type="text" id="sell-title" placeholder="Contoh: Oversized Graphic Tee Airism" required />
+          </div>
+
+          <div class="form-group">
+            <label for="sell-price">Harga (Rp)</label>
+            <input type="number" id="sell-price" placeholder="Contoh: 150000" min="0" required />
+          </div>
+
+          <div class="form-group">
+            <label for="sell-location">Lokasi Penjual</label>
+            <input type="text" id="sell-location" placeholder="Contoh: Jakarta Selatan, DKI Jakarta" required />
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="btn-cancel-sell" class="btn btn-outline">Batal</button>
+            <button type="submit" class="btn btn-primary">Publikasikan Baju</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <!-- ==============================================
+       HALAMAN 5: FORM CHECKOUT / PEMBAYARAN
+  =============================================== -->
+  <section id="page-checkout" class="page">
+    <header class="navbar">
+      <div class="nav-left">
+        <button id="btn-cancel-checkout" class="btn btn-outline btn-sm">
+          ← Batal & Kembali
+        </button>
+        <span class="nav-brand">shirttrd</span>
+      </div>
+    </header>
+
+    <main class="sell-container">
+      <div class="sell-card">
+        <h2>Selesaikan Pembelian</h2>
+        <p class="sell-subtitle">Masukkan alamat pengiriman dan pilih metode pembayaran.</p>
+
+        <!-- Preview Barang Yang Mau Dibeli -->
+        <div class="checkout-product-summary" id="checkout-item-preview">
+          <!-- Diisi via JS -->
+        </div>
+
+        <form id="form-checkout">
+          <!-- Alamat Tujuan -->
+          <div class="form-group">
+            <label for="buyer-address">Alamat Pengiriman Lengkap</label>
+            <textarea id="buyer-address" rows="3" placeholder="Jl. Sudirman No. 45, RT 02/RW 03, Kelurahan, Kecamatan, Kota, Kode Pos" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buyer-phone">Nomor Telepon / WhatsApp</label>
+            <input type="tel" id="buyer-phone" placeholder="081234567890" required />
+          </div>
+
+          <!-- Pilihan Metode Pembayaran -->
+          <div class="form-group">
+            <label>Metode Pembayaran</label>
+            <div class="payment-options">
+              <label class="payment-radio">
+                <input type="radio" name="payment_method" value="COD (Bayar di Tempat)" checked />
+                <span class="payment-box">
+                  <strong>COD (Cash on Delivery)</strong>
+                  <small>Bayar tunai di tempat saat baju sampai ke alamat</small>
+                </span>
+              </label>
+
+              <label class="payment-radio">
+                <input type="radio" name="payment_method" value="Transfer Bank" />
+                <span class="payment-box">
+                  <strong>Transfer Bank</strong>
+                  <small>BCA, Mandiri, BRI, BNI (Verifikasi Otomatis)</small>
+                </span>
+              </label>
+
+              <label class="payment-radio">
+                <input type="radio" name="payment_method" value="QRIS" />
+                <span class="payment-box">
+                  <strong>QRIS</strong>
+                  <small>Scan instan lewat GoPay, OVO, ShopeePay, Dana, m-Banking</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-full" style="padding: 14px;">
+              Konfirmasi & Selesaikan Pembelian
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <script src="java.js"></script>
+</body>
+</html>
