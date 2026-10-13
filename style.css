@@ -111,6 +111,17 @@ body {
   justify-content: center;
   padding: 40px 20px;
   background: #000000;
+  position: relative;
+}
+
+.landing-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  border-bottom: none;
+  padding: 20px 40px;
 }
 
 .landing-container {
@@ -120,6 +131,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
 }
 
 .header-badge {
@@ -177,7 +189,6 @@ body {
   border-color: #ffffff;
 }
 
-/* Kontainer Foto Ukuran Bebas & Fleksibel */
 .photo-wrapper {
   width: 100%;
   height: auto;
@@ -194,14 +205,14 @@ body {
   width: 100%;
   height: auto;
   max-height: 250px;
-  object-fit: contain;     /* Tampil penuh dan alami tanpa terpotong */
+  object-fit: contain;
   display: block;
-  filter: grayscale(100%); /* Monokrom elegan */
+  filter: grayscale(100%);
   transition: filter 0.3s ease;
 }
 
 .photo-card:hover .photo-wrapper img {
-  filter: grayscale(0%);   /* Kembali berwarna saat di-hover */
+  filter: grayscale(0%);
 }
 
 .member-tag {
@@ -356,7 +367,6 @@ body {
   letter-spacing: -0.04em;
 }
 
-/* Tombol Jual Baju Di Kiri Atas */
 .btn-sell {
   background: #ffffff;
   color: #000000;
@@ -416,7 +426,6 @@ body {
   color: #737373;
 }
 
-/* Product Grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -489,7 +498,6 @@ body {
   margin-top: auto;
 }
 
-/* Tombol Beli */
 .btn-buy {
   margin-top: 14px;
   background: #ffffff;
@@ -607,7 +615,6 @@ body {
   margin-top: 24px;
 }
 
-/* Preview Barang Checkout */
 .checkout-product-summary {
   display: flex;
   align-items: center;
@@ -644,7 +651,6 @@ body {
   margin-top: 4px;
 }
 
-/* Opsi Pembayaran */
 .payment-options {
   display: flex;
   flex-direction: column;
@@ -690,6 +696,9 @@ body {
 
 /* Responsif */
 @media (max-width: 600px) {
+  .landing-nav {
+    padding: 15px 20px;
+  }
   .photo-grid {
     gap: 12px;
   }
