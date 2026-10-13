@@ -28,6 +28,7 @@ let products = [
   }
 ];
 
+let currentUser = null; // null jika belum login
 let currentUploadedImage = "";
 let selectedProductToBuy = null;
 
@@ -36,8 +37,8 @@ let selectedProductToBuy = null;
 // ==========================================
 const pages = {
   landing: document.getElementById("page-landing"),
-  auth: document.getElementById("page-auth"),
   dashboard: document.getElementById("page-dashboard"),
+  auth: document.getElementById("page-auth"),
   sell: document.getElementById("page-sell"),
   checkout: document.getElementById("page-checkout")
 };
@@ -50,15 +51,49 @@ function showPage(pageName) {
   }
 }
 
-// Event Navigasi Antar Halaman
-document.getElementById("btn-start").addEventListener("click", () => showPage("auth"));
-document.getElementById("btn-to-login").addEventListener("click", () => showPage("auth"));
-document.getElementById("btn-back-landing").addEventListener("click", () => showPage("landing"));
-document.getElementById("btn-to-sell").addEventListener("click", () => showPage("sell"));
+// Update tampilan Navbar kanan berdasarkan status login
+function updateNavbar() {
+  const navUserArea = document.getElementById("nav-user-area");
+  if (!navUserArea) return;
+
+  if (currentUser) {
+    navUserArea.innerHTML = `
+      <span class="user-greeting">Halo, ${currentUser}!</span>
+      <button id="btn-logout" class="btn btn-outline btn-sm">Keluar</button>
+    `;
+    document.getElementById("btn-logout").addEventListener("click", () => {
+      currentUser = null;
+      alert("Anda telah keluar.");
+      updateNavbar();
+    });
+  } else {
+    navUserArea.innerHTML = `
+      <button id="btn-to-login" class="btn btn-outline btn-sm">Masuk / Login</button>
+    `;
+    document.getElementById("btn-to-login").addEventListener("click", () => showPage("auth"));
+  }
+}
+
+// Inisialisasi awal
+renderProducts();
+updateNavbar();
+
+// Event Navigasi
+document.getElementById("btn-to-dashboard").addEventListener("click", () => showPage("dashboard"));
+document.getElementById("btn-back-dashboard-from-auth").addEventListener("click", () => showPage("dashboard"));
 document.getElementById("btn-back-dashboard").addEventListener("click", () => showPage("dashboard"));
 document.getElementById("btn-cancel-sell").addEventListener("click", () => showPage("dashboard"));
 document.getElementById("btn-cancel-checkout").addEventListener("click", () => showPage("dashboard"));
-document.getElementById("btn-logout").addEventListener("click", () => showPage("auth"));
+
+// PROTEKSI: Tombol Jual Baju (Cek Login)
+document.getElementById("btn-to-sell").addEventListener("click", () => {
+  if (!currentUser) {
+    alert("Silakan login terlebih dahulu untuk menjual baju!");
+    showPage("auth");
+  } else {
+    showPage("sell");
+  }
+});
 
 // ==========================================
 // AUTH (LOGIN & SIGN UP)
@@ -67,7 +102,6 @@ const tabLoginBtn = document.getElementById("tab-login-btn");
 const tabSignupBtn = document.getElementById("tab-signup-btn");
 const formLogin = document.getElementById("form-login");
 const formSignup = document.getElementById("form-signup");
-const userDisplay = document.getElementById("user-display");
 
 tabLoginBtn.addEventListener("click", () => {
   tabLoginBtn.classList.add("active");
@@ -83,20 +117,24 @@ tabSignupBtn.addEventListener("click", () => {
   formLogin.classList.remove("active");
 });
 
+// Submit Login
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
   const identifier = document.getElementById("login-identifier").value.trim();
-  userDisplay.textContent = `Halo, ${identifier.split("@")[0]}!`;
-  renderProducts();
+  currentUser = identifier.split("@")[0];
+  alert(`Berhasil masuk sebagai ${currentUser}!`);
+  formLogin.reset();
+  updateNavbar();
   showPage("dashboard");
 });
 
+// Submit Sign Up
 formSignup.addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.getElementById("reg-name").value.trim();
-  userDisplay.textContent = `Halo, ${name}!`;
-  renderProducts();
-  showPage("dashboard");
+  alert(`Akun untuk ${name} berhasil dibuat! Silakan login.`);
+  formSignup.reset();
+  tabLoginBtn.click();
 });
 
 // ==========================================
@@ -113,6 +151,7 @@ function formatRupiah(amount) {
 function renderProducts() {
   const productContainer = document.getElementById("product-list");
   const countBadge = document.getElementById("product-count");
+  if (!productContainer) return;
   productContainer.innerHTML = "";
 
   countBadge.textContent = `${products.length} Produk`;
@@ -156,10 +195,14 @@ function renderProducts() {
   });
 }
 
-// ==========================================
-// ALUR CHECKOUT & PEMBELIAN
-// ==========================================
+// PROTEKSI: Tombol Beli Baju / Checkout (Cek Login)
 function openCheckout(productId) {
+  if (!currentUser) {
+    alert("Silakan login terlebih dahulu untuk membeli baju!");
+    showPage("auth");
+    return;
+  }
+
   const item = products.find(p => p.id === productId);
   if (!item) return;
 
@@ -192,6 +235,7 @@ formCheckout.addEventListener("submit", (e) => {
 
   alert(
     `✅ Pembelian Berhasil!\n\n` +
+    `Pembeli: ${currentUser}\n` +
     `Produk: ${selectedProductToBuy.title} (${selectedProductToBuy.brand})\n` +
     `Total: ${formatRupiah(selectedProductToBuy.price)}\n` +
     `Metode Pembayaran: ${paymentMethod}\n` +
