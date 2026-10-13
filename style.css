@@ -99,7 +99,7 @@ body {
 }
 
 /* ========================================================
-   HALAMAN 1: LANDING & FOTO UKURAN BEBAS
+   HALAMAN 1: LANDING (PROFIL KELOMPOK)
 ======================================================== */
 #page-landing {
   display: none;
@@ -111,17 +111,6 @@ body {
   justify-content: center;
   padding: 40px 20px;
   background: #000000;
-  position: relative;
-}
-
-.landing-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: transparent;
-  border-bottom: none;
-  padding: 20px 40px;
 }
 
 .landing-container {
@@ -131,7 +120,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
 }
 
 .header-badge {
@@ -696,9 +684,6 @@ body {
 
 /* Responsif */
 @media (max-width: 600px) {
-  .landing-nav {
-    padding: 15px 20px;
-  }
   .photo-grid {
     gap: 12px;
   }
