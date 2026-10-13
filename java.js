@@ -29,7 +29,7 @@ let products = [
 ];
 
 let currentUploadedImage = "";
-let selectedProductToBuy = null; // Menyimpan data baju yang dipilih untuk checkout
+let selectedProductToBuy = null;
 
 // ==========================================
 // NAVIGASI HALAMAN (ROUTING)
@@ -52,6 +52,7 @@ function showPage(pageName) {
 
 // Event Navigasi Antar Halaman
 document.getElementById("btn-start").addEventListener("click", () => showPage("auth"));
+document.getElementById("btn-to-login").addEventListener("click", () => showPage("auth"));
 document.getElementById("btn-back-landing").addEventListener("click", () => showPage("landing"));
 document.getElementById("btn-to-sell").addEventListener("click", () => showPage("sell"));
 document.getElementById("btn-back-dashboard").addEventListener("click", () => showPage("dashboard"));
@@ -82,7 +83,6 @@ tabSignupBtn.addEventListener("click", () => {
   formLogin.classList.remove("active");
 });
 
-// Login
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
   const identifier = document.getElementById("login-identifier").value.trim();
@@ -91,7 +91,6 @@ formLogin.addEventListener("submit", (e) => {
   showPage("dashboard");
 });
 
-// Register
 formSignup.addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.getElementById("reg-name").value.trim();
@@ -166,7 +165,6 @@ function openCheckout(productId) {
 
   selectedProductToBuy = item;
 
-  // Render detail ringkasan baju di halaman checkout
   const previewContainer = document.getElementById("checkout-item-preview");
   previewContainer.innerHTML = `
     <img src="${item.image}" class="checkout-img" alt="${item.title}">
@@ -178,7 +176,6 @@ function openCheckout(productId) {
     </div>
   `;
 
-  // Tampilkan halaman checkout
   showPage("checkout");
 }
 
@@ -193,7 +190,6 @@ formCheckout.addEventListener("submit", (e) => {
   const phone = document.getElementById("buyer-phone").value.trim();
   const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
 
-  // Pop-up notifikasi konfirmasi
   alert(
     `✅ Pembelian Berhasil!\n\n` +
     `Produk: ${selectedProductToBuy.title} (${selectedProductToBuy.brand})\n` +
@@ -204,14 +200,11 @@ formCheckout.addEventListener("submit", (e) => {
     `Baju berhasil dibeli dan otomatis dihapus dari daftar etalase.`
   );
 
-  // Otomatis hapus baju yang dibeli dari list produk
   products = products.filter(p => p.id !== selectedProductToBuy.id);
 
-  // Reset form checkout
   formCheckout.reset();
   selectedProductToBuy = null;
 
-  // Render ulang list dashboard dan arahkan kembali ke dashboard
   renderProducts();
   showPage("dashboard");
 });
@@ -251,7 +244,6 @@ formSell.addEventListener("submit", (e) => {
     return;
   }
 
-  // Tambahkan produk baru ke urutan paling atas
   const newProduct = {
     id: Date.now(),
     brand,
@@ -263,13 +255,11 @@ formSell.addEventListener("submit", (e) => {
 
   products.unshift(newProduct);
 
-  // Reset formulir jual baju
   formSell.reset();
   currentUploadedImage = "";
   imagePreview.style.display = "none";
   uploadPlaceholder.style.display = "flex";
 
-  // Perbarui etalase dan buka dashboard
   renderProducts();
   showPage("dashboard");
 });
