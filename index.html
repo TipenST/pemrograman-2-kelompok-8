@@ -11,25 +11,15 @@
 <body>
 
   <!-- ==============================================
-        HALAMAN 1: KELOMPOK 8 & FOTO ANGGOTA
+        HALAMAN 1: KELOMPOK 8 & FOTO ANGGOTA (LANDING)
   =============================================== -->
   <section id="page-landing" class="page active">
-    <!-- Navbar Landing Page dengan Tombol Masuk di Pojok Kanan Atas -->
-    <header class="navbar landing-nav">
-      <div class="nav-left">
-        <span class="nav-brand">shirttrd</span>
-      </div>
-      <div class="nav-right">
-        <button id="btn-to-login" class="btn btn-outline btn-sm">Masuk / Daftar</button>
-      </div>
-    </header>
-
-    <div class="landing-container">
+    <div class="landing-container" style="justify-content: center; min-height: 100vh;">
       <div class="header-badge">Proyek Web</div>
       <h1 class="main-title">Kelompok 8</h1>
       <p class="subtitle">Anggota Tim Pengembang Website shirttrd</p>
 
-      <!-- Kotak Foto Ukuran Bebas -->
+      <!-- Kotak Foto Anggota -->
       <div class="photo-grid">
         <div class="photo-card">
           <div class="photo-wrapper">
@@ -51,9 +41,9 @@
         </div>
       </div>
 
-      <!-- Tombol Mulai -->
-      <button id="btn-start" class="btn btn-primary btn-large">
-        Mulai Jelajahi
+      <!-- Tombol Masuk ke Dashboard Web -->
+      <button id="btn-to-dashboard" class="btn btn-primary btn-large">
+        Masuk ke Web Dashboard
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
@@ -62,7 +52,47 @@
   </section>
 
   <!-- ==============================================
-        HALAMAN 2: LOGIN & SIGN UP (shirttrd)
+        HALAMAN 2: DASHBOARD WEB (KATALOG PRODUK UTAMA)
+  =============================================== -->
+  <section id="page-dashboard" class="page">
+    <header class="navbar">
+      <div class="nav-left">
+        <button id="btn-to-sell" class="btn btn-sell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Jual Baju
+        </button>
+        <span class="nav-brand">shirttrd</span>
+      </div>
+      <div class="nav-right" id="nav-user-area">
+        <!-- Berubah dinamis via JS: Tombol Login atau User Greeting + Logout -->
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <div class="banner">
+        <div>
+          <h2>Koleksi Pakaian Pilihan</h2>
+          <p>Temukan outfit favorit dari brand ternama dan penjual terverifikasi.</p>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h3>Produk Tersedia</h3>
+        <span class="item-count" id="product-count">0 Produk</span>
+      </div>
+
+      <!-- List Produk Baju -->
+      <div class="product-grid" id="product-list">
+        <!-- Diisi dinamis oleh JavaScript -->
+      </div>
+    </main>
+  </section>
+
+  <!-- ==============================================
+        HALAMAN 3: LOGIN & SIGN UP (AUTENTIKASI)
   =============================================== -->
   <section id="page-auth" class="page">
     <div class="auth-card">
@@ -108,50 +138,9 @@
       </form>
 
       <div class="auth-footer">
-        <button id="btn-back-landing" class="btn-text">← Kembali ke Halaman Utama</button>
+        <button id="btn-back-dashboard-from-auth" class="btn-text">← Kembali ke Dashboard</button>
       </div>
     </div>
-  </section>
-
-  <!-- ==============================================
-        HALAMAN 3: DASHBOARD LIST BAJU
-  =============================================== -->
-  <section id="page-dashboard" class="page">
-    <header class="navbar">
-      <div class="nav-left">
-        <button id="btn-to-sell" class="btn btn-sell">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Jual Baju
-        </button>
-        <span class="nav-brand">shirttrd</span>
-      </div>
-      <div class="nav-right">
-        <span class="user-greeting" id="user-display">Halo, Pengguna!</span>
-        <button id="btn-logout" class="btn btn-outline btn-sm">Keluar</button>
-      </div>
-    </header>
-
-    <main class="dashboard-content">
-      <div class="banner">
-        <div>
-          <h2>Koleksi Pakaian Pilihan</h2>
-          <p>Temukan outfit favorit dari brand ternama dan penjual terverifikasi.</p>
-        </div>
-      </div>
-
-      <div class="section-header">
-        <h3>Produk Tersedia</h3>
-        <span class="item-count" id="product-count">0 Produk</span>
-      </div>
-
-      <!-- List Produk Baju -->
-      <div class="product-grid" id="product-list">
-        <!-- Diisi dinamis oleh JavaScript -->
-      </div>
-    </main>
   </section>
 
   <!-- ==============================================
@@ -243,7 +232,6 @@
         </div>
 
         <form id="form-checkout">
-          <!-- Alamat Tujuan -->
           <div class="form-group">
             <label for="buyer-address">Alamat Pengiriman Lengkap</label>
             <textarea id="buyer-address" rows="3" placeholder="Jl. Sudirman No. 45, RT 02/RW 03, Kelurahan, Kecamatan, Kota, Kode Pos" required></textarea>
@@ -254,7 +242,6 @@
             <input type="tel" id="buyer-phone" placeholder="081234567890" required />
           </div>
 
-          <!-- Pilihan Metode Pembayaran -->
           <div class="form-group">
             <label>Metode Pembayaran</label>
             <div class="payment-options">
